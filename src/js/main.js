@@ -6,11 +6,12 @@ let HeroSection = document.getElementById("HeroSection");
 let app_loading = document.getElementById("app-loading-overlay");
 let Meal_Content_Grid = document.getElementById("Meal_Content_Grid");
 
+
 // navbar bottoms -------------------------------------------------
 let bottonProductScanner = document.getElementById("ProductScanner");
 let Mealsbottom = document.getElementById("Mealsbottom");
 let FoodLogbotton = document.getElementById("FoodLogbotton");
-let header_title = document.getElementById("header_title");
+let header_title=document.getElementById("header_title");
 
 bottonProductScanner.addEventListener("click", function () {
   products.classList.remove("hidden");
@@ -18,16 +19,17 @@ bottonProductScanner.addEventListener("click", function () {
   mealDetails.classList.add("hidden");
   foodlog.classList.add("hidden");
   HeroSection.classList.add("hidden");
-  bottonProductScanner.classList.add("bg-emerald-50", "text-emerald-700");
-  FoodLogbotton.classList.remove("bg-emerald-50", "text-emerald-700");
-  Mealsbottom.classList.remove("bg-emerald-50", "text-emerald-700");
-  header_title.innerHTML = `
+    bottonProductScanner.classList.add("bg-emerald-50", "text-emerald-700");
+    FoodLogbotton.classList.remove("bg-emerald-50", "text-emerald-700");
+    Mealsbottom.classList.remove("bg-emerald-50", "text-emerald-700");
+    header_title.innerHTML=`
      <h1 class="text-2xl font-bold text-gray-900">
          Product Scanner
      </h1>
       <p class="text-sm text-gray-500 mt-1">
          Search packaged foods by name or barcode
       </p>`;
+      
 });
 
 Mealsbottom.addEventListener("click", function () {
@@ -36,11 +38,11 @@ Mealsbottom.addEventListener("click", function () {
   mealDetails.classList.add("hidden");
   foodlog.classList.add("hidden");
   HeroSection.classList.add("hidden");
-  bottonProductScanner.classList.remove("bg-emerald-50", "text-emerald-700");
-  FoodLogbotton.classList.remove("bg-emerald-50", "text-emerald-700");
-  Mealsbottom.classList.add("bg-emerald-50", "text-emerald-700");
+    bottonProductScanner.classList.remove("bg-emerald-50", "text-emerald-700");
+    FoodLogbotton.classList.remove("bg-emerald-50", "text-emerald-700");
+    Mealsbottom.classList.add("bg-emerald-50", "text-emerald-700");
 
-  header_title.innerHTML = `
+        header_title.innerHTML=`
      <h1 class="text-2xl font-bold text-gray-900">
          Meals & Recipes
      </h1>
@@ -49,7 +51,9 @@ Mealsbottom.addEventListener("click", function () {
       </p>`;
 });
 
+
 //------------------------------------------------
+
 
 // (api_index_meals) meals bottoms -------------------------------------------------
 
@@ -163,13 +167,15 @@ function displayallcategories() {
   }
   categories_bottns.innerHTML = box;
 
-  document.querySelectorAll(".category-card").forEach((btn) => {
+ document.querySelectorAll(".category-card").forEach(btn => {
     btn.addEventListener("click", function () {
       let category = this.dataset.category;
       console.log(category); // اطبعها
-      filterByCategory(category);
+      filterByCategory(category); 
     });
   });
+
+
 }
 
 async function filterByCategory(category_name) {
@@ -179,7 +185,7 @@ async function filterByCategory(category_name) {
   if (response.ok) {
     let dataa = await response.json();
 
-    displayall(dataa);
+   displayall(dataa) 
   } else {
     console.log("error");
   }
@@ -193,7 +199,7 @@ let global_areas;
 
 async function api_areas_buttons() {
   let response = await fetch(
-    `https://nutriplan-api.vercel.app/api/meals/areas`,
+    `https://nutriplan-api.vercel.app/api/meals/areas`
   );
 
   if (response.ok) {
@@ -226,7 +232,7 @@ function displayAllAreas() {
   areas_buttons.innerHTML = box;
 
   // لما ادوس
-  document.querySelectorAll(".area-btn").forEach((btn) => {
+  document.querySelectorAll(".area-btn").forEach(btn => {
     btn.addEventListener("click", function () {
       let area = this.dataset.area;
       console.log(area);
@@ -242,7 +248,7 @@ async function filterByArea(area_name) {
   }
 
   let response = await fetch(
-    `https://nutriplan-api.vercel.app/api/meals/filter?area=${area_name}&page=1&limit=25`,
+    `https://nutriplan-api.vercel.app/api/meals/filter?area=${area_name}&page=1&limit=25`
   );
 
   if (response.ok) {
@@ -259,8 +265,9 @@ api_areas_buttons();
 let searchInput = document.getElementById("search-input");
 
 async function search_meals(search_value) {
+
   let response = await fetch(
-    `https://nutriplan-api.vercel.app/api/meals/search?q=${search_value}&page=1&limit=25`,
+    `https://nutriplan-api.vercel.app/api/meals/search?q=${search_value}&page=1&limit=25`
   );
 
   if (response.ok) {
@@ -269,11 +276,13 @@ async function search_meals(search_value) {
   } else {
     console.log("error");
   }
+
+
 }
 
-searchInput.addEventListener("input", function (e) {
-  search_meals(e.target.value);
-});
+searchInput.addEventListener('input',function(e){
+search_meals(e.target.value)
+})
 //==========================================================================================================================================================
 // (show_meal_details) -------------------------------------- left -----------
 async function show_meal_details(id) {
@@ -290,12 +299,13 @@ async function show_meal_details(id) {
 
     //loading
     app_loading.classList.add("hidden");
+
   } else {
     console.log("error");
   }
 }
 // (show_meal_details) ------------------------------------- right -----------
-async function display_meal_details(details) {
+async  function display_meal_details(details) {
   meals.classList.add("hidden");
   HeroSection.classList.remove("hidden");
   mealDetails.classList.remove("hidden");
@@ -349,9 +359,11 @@ async function display_meal_details(details) {
           
           `;
 
-  // Log This Meal bottom
-  let logMealContainer = document.getElementById("log-meal-btn");
-  logMealContainer.innerHTML = `
+       
+
+// Log This Meal bottom 
+let logMealContainer = document.getElementById("log-meal-btn");
+logMealContainer.innerHTML = `
   <button
     class="flex items-center gap-2 px-6 py-3 bg-blue-600 text-white rounded-xl font-semibold hover:bg-blue-700 transition-all"
     data-meal-id="${details.result.id}"
@@ -361,9 +373,10 @@ async function display_meal_details(details) {
   </button>
 `;
 
-  logMealContainer.addEventListener("click", function () {
-    log_meal_modal.classList.remove("hidden");
-  });
+logMealContainer.addEventListener("click", function() {
+  log_meal_modal.classList.remove("hidden");
+});
+
 
   function showtags(tags) {
     return tags
@@ -498,55 +511,57 @@ async function display_meal_details(details) {
     const videoId = url.split("v=")[1]?.split("&")[0];
     return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
   }
-  //-----------------------------------------------------------------
+//-----------------------------------------------------------------
   //-----------------------------------------بيانات ال nutrition
 
   const ingredientsForAPI = details.result.ingredients.map(
-    (i) => `${i.measure} ${i.ingredient}`,
-  );
-  const nutrition = await fetchNutrition(
-    details.result.name,
-    ingredientsForAPI,
-  );
+  i => `${i.measure} ${i.ingredient}`
+);
+const nutrition = await fetchNutrition(
+  details.result.name,
+  ingredientsForAPI
+);
 
-  async function fetchNutrition(recipeName, ingredients) {
-    try {
-      let response = await fetch(
-        "https://nutriplan-api.vercel.app/api/nutrition/analyze",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "x-api-key": "X88YcqdxlnvRt5dDH06tdGYCGmcFZdTCevkYUoyi",
-          },
-          body: JSON.stringify({
-            recipeName: recipeName,
-            ingredients: ingredients,
-          }),
+async function fetchNutrition(recipeName, ingredients) {
+  try {
+    let response = await fetch(
+      "https://nutriplan-api.vercel.app/api/nutrition/analyze",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": "X88YcqdxlnvRt5dDH06tdGYCGmcFZdTCevkYUoyi"
         },
-      );
+        body: JSON.stringify({
+          recipeName: recipeName,
+          ingredients: ingredients
+        })
+      }
+    );
 
-      if (!response.ok) throw new Error("Nutrition API error");
+    if (!response.ok) throw new Error("Nutrition API error");
 
-      return await response.json();
-    } catch (err) {
-      console.log(err);
-      return null;
-    }
+    return await response.json();
+  } catch (err) {
+    console.log(err);
+    return null;
   }
+}
 
-  //هعرض العدد الكلي فوق عند الصورة
-  var hero_calories = document.getElementById("hero-calories");
+ //هعرض العدد الكلي فوق عند الصورة 
+var hero_calories=document.getElementById('hero-calories');
 
-  if (nutrition) {
-    const perServing = nutrition.data.perServing;
+if (nutrition) {
 
-    //هعرض العدد الكلي فوق عند الصورة
-    hero_calories.innerText = `${perServing.calories} cal/serving`;
+ const perServing = nutrition.data.perServing;
+
+ //هعرض العدد الكلي فوق عند الصورة 
+hero_calories.innerText = `${perServing.calories} cal/serving`;
 
     display_log_meal_modal(perServing, details.result);
 
-    document.getElementById("nutrition-facts-container").innerHTML = `
+
+document.getElementById('nutrition-facts-container').innerHTML = `
 <p class="text-sm text-gray-500 mb-4">Per serving</p>
 
 <div class="text-center py-4 mb-4 bg-linear-to-br from-emerald-50 to-teal-50 rounded-xl">
@@ -557,55 +572,13 @@ async function display_meal_details(details) {
 
 <div class="space-y-4">
     ${[
-      {
-        label: "Protein",
-        value: perServing.protein,
-        color: "emerald",
-        percent: Math.round(
-          (perServing.protein / nutrition.data.totals.protein) * 100,
-        ),
-      },
-      {
-        label: "Carbs",
-        value: perServing.carbs,
-        color: "blue",
-        percent: Math.round(
-          (perServing.carbs / nutrition.data.totals.carbs) * 100,
-        ),
-      },
-      {
-        label: "Fat",
-        value: perServing.fat,
-        color: "purple",
-        percent: Math.round((perServing.fat / nutrition.data.totals.fat) * 100),
-      },
-      {
-        label: "Fiber",
-        value: perServing.fiber,
-        color: "orange",
-        percent: Math.round(
-          (perServing.fiber / nutrition.data.totals.fiber) * 100,
-        ),
-      },
-      {
-        label: "Sugar",
-        value: perServing.sugar,
-        color: "pink",
-        percent: Math.round(
-          (perServing.sugar / nutrition.data.totals.sugar) * 100,
-        ),
-      },
-      {
-        label: "Saturated Fat",
-        value: perServing.saturatedFat,
-        color: "red",
-        percent: Math.round(
-          (perServing.saturatedFat / nutrition.data.totals.saturatedFat) * 100,
-        ),
-      },
-    ]
-      .map(
-        (n) => `
+      { label: "Protein", value: perServing.protein, color: "emerald", percent: Math.round((perServing.protein / nutrition.data.totals.protein) * 100) },
+      { label: "Carbs", value: perServing.carbs, color: "blue", percent: Math.round((perServing.carbs / nutrition.data.totals.carbs) * 100) },
+      { label: "Fat", value: perServing.fat, color: "purple", percent: Math.round((perServing.fat / nutrition.data.totals.fat) * 100) },
+      { label: "Fiber", value: perServing.fiber, color: "orange", percent: Math.round((perServing.fiber / nutrition.data.totals.fiber) * 100) },
+      { label: "Sugar", value: perServing.sugar, color: "pink", percent: Math.round((perServing.sugar / nutrition.data.totals.sugar) * 100) },
+      { label: "Saturated Fat", value: perServing.saturatedFat, color: "red", percent: Math.round((perServing.saturatedFat / nutrition.data.totals.saturatedFat) * 100) }
+    ].map(n => `
       <div class="flex items-center justify-between">
           <div class="flex items-center gap-2">
               <div class="w-3 h-3 rounded-full bg-${n.color}-500"></div>
@@ -616,9 +589,7 @@ async function display_meal_details(details) {
       <div class="w-full bg-gray-100 rounded-full h-2">
           <div class="bg-${n.color}-500 h-2 rounded-full" style="width:${n.percent}%"></div>
       </div>
-    `,
-      )
-      .join("")}
+    `).join('')}
 </div>
 
 <div class="mt-6 pt-6 border-t border-gray-100">
@@ -635,8 +606,11 @@ async function display_meal_details(details) {
     </div>
 </div>
 `;
-  }
+
 }
+
+}
+
 
 //==========================================================================================================================================================
 //=========================== Product Search & Barcode Scanner ===================================
@@ -692,6 +666,7 @@ async function unified_search(value_search, isBarcode = false) {
     }
 
     displayall_search(isBarcode, value_search);
+
   } catch (err) {
     console.log("Error:", err);
     post.innerHTML = "<p class='text-red-500'>Error fetching products</p>";
@@ -704,11 +679,7 @@ async function unified_search(value_search, isBarcode = false) {
 function displayall_search(isBarcode = false, search_value = "") {
   let products_count = document.getElementById("products-count");
 
-  if (
-    !global_value ||
-    !global_value.results ||
-    global_value.results.length === 0
-  ) {
+  if (!global_value || !global_value.results || global_value.results.length === 0) {
     products_count.innerHTML = `No product found for ${isBarcode ? "Barcode" : "Search"} "${search_value}"`;
     post.innerHTML = "";
     return;
@@ -728,7 +699,7 @@ function displayall_search(isBarcode = false, search_value = "") {
       <div   onclick="ProductDetailsModal('${product.barcode}')"  class="product-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer group">
         <div class="relative h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
           <img class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-            src="${product.image || ""}" alt="${product.name || ""}" loading="lazy" />
+            src="${product.image || ''}" alt="${product.name || ''}" loading="lazy" />
 
           <div class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded uppercase">
             Nutri-Score ${product.nutritionGrade || "-"}
@@ -772,7 +743,7 @@ function displayall_search(isBarcode = false, search_value = "") {
   post.innerHTML = box;
 }
 //-------------------------------------------------------------------------filter botton
-document.querySelectorAll(".nutri-score-filter").forEach((btn) => {
+document.querySelectorAll(".nutri-score-filter").forEach(btn => {
   btn.addEventListener("click", function () {
     filterByNutriScore(this.dataset.grade);
   });
@@ -788,7 +759,7 @@ function filterByNutriScore(grade) {
     resultsToShow = global_value.results;
   } else {
     resultsToShow = global_value.results.filter(
-      (p) => p.nutritionGrade?.toLowerCase() === grade.toLowerCase(),
+      p => p.nutritionGrade?.toLowerCase() === grade.toLowerCase()
     );
   }
 
@@ -812,7 +783,7 @@ function displayFilteredResults(results, grade) {
       <div   onclick="ProductDetailsModal('${product.barcode}')"  class="product-card bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all cursor-pointer group">
         <div class="relative h-40 bg-gray-100 flex items-center justify-center overflow-hidden">
           <img class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-300"
-            src="${product.image || ""}" alt="${product.name || ""}" loading="lazy" />
+            src="${product.image || ''}" alt="${product.name || ''}" loading="lazy" />
 
           <div class="absolute top-2 left-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded uppercase">
             Nutri-Score ${product.nutritionGrade || "-"}
@@ -857,9 +828,9 @@ function displayFilteredResults(results, grade) {
 }
 
 //------------------------------------------------------------------------- Browse by Category
-document.querySelectorAll(".product-category-btn").forEach((btn) => {
+document.querySelectorAll(".product-category-btn").forEach(btn => {
   btn.addEventListener("click", function () {
-    let category = this.dataset.category;
+    let category = this.dataset.category; 
     if (category) {
       // نبحث عادي ومش باركود
       unified_search(category, false);
@@ -867,12 +838,12 @@ document.querySelectorAll(".product-category-btn").forEach((btn) => {
   });
 });
 //------------------------------------------------------------------------- product_barcode modal
-let modal_view = document.getElementById("product-detail-modal");
+let modal_view= document.getElementById("product-detail-modal");
 
-function ProductDetailsModal(product_barcode) {
+function ProductDetailsModal(product_barcode){
   console.log(product_barcode);
   api_ProductDetailsModal(product_barcode);
-
+  
   modal_view.classList.remove("hidden");
 }
 async function api_ProductDetailsModal(barcode) {
@@ -888,9 +859,10 @@ async function api_ProductDetailsModal(barcode) {
   }
 }
 
-function display_modal(modal) {
-  let product = modal.results ? modal.results[0] : modal.result;
-  let box = ` 
+
+function display_modal(modal){
+let product = modal.results ? modal.results[0] : modal.result;
+ let box=  ` 
     <div class="bg-white rounded-2xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
       <div class="p-6">
         <!-- Header -->
@@ -910,13 +882,13 @@ function display_modal(modal) {
                 </span>
                 <div>
                   <p class="text-xs font-bold" style="color: #038141">Nutri-Score</p>
-                  <p class="text-[10px] text-gray-600">${product.nutritionGrade || "N/A"}</p>
+                  <p class="text-[10px] text-gray-600">${product.nutritionGrade || 'N/A'}</p>
                 </div>
               </div>
               
               <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg" style="background-color: #03814120">
                 <span class="w-8 h-8 rounded-full flex items-center justify-center text-white font-bold" style="background-color: #038141">
-                  ${product.novaGroup || "-"}
+                  ${product.novaGroup || '-'}
                 </span>
                 <div>
                   <p class="text-xs font-bold" style="color: #038141">NOVA</p>
@@ -970,25 +942,27 @@ function display_modal(modal) {
     </div>
   `;
 
-  modal_view.innerHTML = box;
+  modal_view.innerHTML = box; 
+
 
   // close button
-  modal_view.querySelectorAll(".close-product-modal").forEach((btn) => {
+  modal_view.querySelectorAll(".close-product-modal").forEach(btn => {
     btn.addEventListener("click", () => {
       modal_view.classList.add("hidden");
     });
   });
 
-  [log_meal_modal, modal_view].forEach((modal) => {
-    modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-      }
-    });
-  });
 
-  modal_view
-    .querySelector(".add-product-to-log")
+[log_meal_modal, modal_view].forEach(modal => {
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.classList.add("hidden");
+        }
+    });
+});
+
+  
+  modal_view.querySelector(".add-product-to-log")
     .addEventListener("click", () => {
       addToFoodLog({
         id: product.barcode,
@@ -1000,7 +974,7 @@ function display_modal(modal) {
         carbs: product.nutrients.carbs,
         fat: product.nutrients.fat,
         servings: product.brand || "Unknown Brand",
-        time: new Date().toLocaleTimeString(),
+        time: new Date().toLocaleTimeString()
       });
 
       modal_view.classList.add("hidden");
@@ -1009,14 +983,13 @@ function display_modal(modal) {
 }
 //-------------------------------------------------------------------------------------------------
 
-//------------------------------------------------------------------------- log_meal_modal
-let log_meal_modal = document.getElementById("log-meal-modal");
 
-function display_log_meal_modal(nutrition_data, meal) {
-  let nutritions = nutrition_data.results
-    ? nutrition_data.results[0]
-    : nutrition_data.result;
-  let box = ` 
+//------------------------------------------------------------------------- log_meal_modal
+let log_meal_modal= document.getElementById("log-meal-modal");
+
+function  display_log_meal_modal(nutrition_data, meal){
+let nutritions = nutrition_data.results ? nutrition_data.results[0] : nutrition_data.result;
+ let box=  ` 
     <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
                 <div class="flex items-center gap-4 mb-6">
                     <img src="${meal.thumbnail}" alt="${meal.name}" class="w-16 h-16 rounded-xl object-cover">
@@ -1070,46 +1043,49 @@ function display_log_meal_modal(nutrition_data, meal) {
                 </div>
             </div>
   `;
-  log_meal_modal.innerHTML = box;
+            log_meal_modal.innerHTML=box;
 
-  [log_meal_modal, modal_view].forEach((modal) => {
+[log_meal_modal, modal_view].forEach(modal => {
     modal.addEventListener("click", (e) => {
-      if (e.target === modal) {
-        modal.classList.add("hidden");
-      }
+        if (e.target === modal) {
+            modal.classList.add("hidden");
+        }
     });
+});
+
+ //-------------------
+ document.getElementById("confirm-log-meal").addEventListener("click", () => {
+  const servings = parseFloat(document.getElementById("meal-servings").value);
+
+  addToFoodLog({
+    id: meal.id,
+    type: "meal",
+    name: meal.name,
+    thumbnail: meal.thumbnail,
+    calories: nutrition_data.calories * servings,
+    protein: nutrition_data.protein * servings,
+    carbs: nutrition_data.carbs * servings,
+    fat: nutrition_data.fat * servings,
+    servings,
+    time: new Date().toLocaleTimeString()
   });
 
-  //-------------------
-  document.getElementById("confirm-log-meal").addEventListener("click", () => {
-    const servings = parseFloat(document.getElementById("meal-servings").value);
+  log_meal_modal.classList.add("hidden");
+  alert("Meal added to Food Log ✅");
+});
 
-    addToFoodLog({
-      id: meal.id,
-      type: "meal",
-      name: meal.name,
-      thumbnail: meal.thumbnail,
-      calories: nutrition_data.calories * servings,
-      protein: nutrition_data.protein * servings,
-      carbs: nutrition_data.carbs * servings,
-      fat: nutrition_data.fat * servings,
-      servings,
-      time: new Date().toLocaleTimeString(),
-    });
+ //------------------           
 
+document.getElementById("cancel-log-meal").addEventListener("click", () => {
     log_meal_modal.classList.add("hidden");
-    alert("Meal added to Food Log ✅");
-  });
 
-  //------------------
+});
 
-  document.getElementById("cancel-log-meal").addEventListener("click", () => {
-    log_meal_modal.classList.add("hidden");
-  });
 }
 
 //==========================================================================================================================
 //=============== Food Log page
+
 
 //تاريخ لنهاردة
 function getTodayKey() {
@@ -1123,6 +1099,7 @@ function getFoodLog() {
 function saveFoodLog(log) {
   localStorage.setItem("foodLog", JSON.stringify(log));
 }
+
 
 function addToFoodLog(item) {
   const log = getFoodLog();
@@ -1146,8 +1123,11 @@ function addToFoodLog(item) {
   log[today].items.push(item);
   saveFoodLog(log);
 
+
   updateProgressBars(log[today]);
 }
+
+
 
 function loadTodayProgress() {
   const log = getFoodLog();
@@ -1166,12 +1146,15 @@ function loadTodayProgress() {
   }
 }
 
+
+
 const DAILY_LIMITS = {
   calories: 2000,
   protein: 50,
   carbs: 250,
   fat: 65,
 };
+
 
 function updateProgressBars(data) {
   updateBar("calories", data.calories, DAILY_LIMITS.calories);
@@ -1192,12 +1175,13 @@ function updateProgressBars(data) {
     `${data.fat} / ${DAILY_LIMITS.fat} g`;
 }
 
+
 function updateBar(type, value, max) {
   const percent = Math.min((value / max) * 100, 100);
   document.querySelector(`.${type}-bar`).style.width = percent + "%";
 }
 
-const countTitle = document.querySelector("h4");
+ const countTitle = document.querySelector("h4");
 
 function renderLoggedItems(items) {
   const container = document.getElementById("logged-items-list");
@@ -1216,7 +1200,7 @@ function renderLoggedItems(items) {
 
   countTitle.innerText = `Logged Items (${items.length})`;
 
-  items.forEach((item) => {
+  items.forEach(item => {
     container.innerHTML += `
      
                     <div class="flex items-center justify-between bg-gray-50 rounded-xl p-4 hover:bg-gray-100 transition-all">
@@ -1250,35 +1234,42 @@ function renderLoggedItems(items) {
                 
     `;
 
+
+
+
     // بعد عرض كل العناصر
-    document.querySelectorAll(".remove-foodlog-item").forEach((btn, index) => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        e.stopPropagation();
+document.querySelectorAll(".remove-foodlog-item").forEach((btn, index) => {
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
 
-        const log = getFoodLog();
-        const today = getTodayKey();
+    const log = getFoodLog();
+    const today = getTodayKey();
 
-        if (log[today] && log[today].items[index]) {
-          // خصم القيم الغذائية قبل الحذف
-          const item = log[today].items[index];
-          log[today].calories -= item.calories;
-          log[today].protein -= item.protein;
-          log[today].carbs -= item.carbs;
-          log[today].fat -= item.fat;
+    if (log[today] && log[today].items[index]) {
+      // خصم القيم الغذائية قبل الحذف
+      const item = log[today].items[index];
+      log[today].calories -= item.calories;
+      log[today].protein -= item.protein;
+      log[today].carbs -= item.carbs;
+      log[today].fat -= item.fat;
 
-          // حذف العنصر
-          log[today].items.splice(index, 1);
+      // حذف العنصر
+      log[today].items.splice(index, 1);
 
-          saveFoodLog(log);
+      saveFoodLog(log);
 
-          // إعادة عرض الصفحة
-          renderFoodLogPage();
-        }
-      });
-    });
+      // إعادة عرض الصفحة
+      renderFoodLogPage();
+    }
+  });
+});
+
+
+
   });
 }
+
 
 FoodLogbotton.addEventListener("click", function () {
   products.classList.add("hidden");
@@ -1286,10 +1277,10 @@ FoodLogbotton.addEventListener("click", function () {
   mealDetails.classList.add("hidden");
   foodlog.classList.remove("hidden");
   HeroSection.classList.add("hidden");
-  bottonProductScanner.classList.remove("bg-emerald-50", "text-emerald-700");
-  FoodLogbotton.classList.add("bg-emerald-50", "text-emerald-700");
-  Mealsbottom.classList.remove("bg-emerald-50", "text-emerald-700");
-  header_title.innerHTML = `
+      bottonProductScanner.classList.remove("bg-emerald-50", "text-emerald-700");
+    FoodLogbotton.classList.add("bg-emerald-50", "text-emerald-700");
+    Mealsbottom.classList.remove("bg-emerald-50", "text-emerald-700");
+        header_title.innerHTML=`
      <h1 class="text-2xl font-bold text-gray-900">
          Food Log
      </h1>
@@ -1297,43 +1288,47 @@ FoodLogbotton.addEventListener("click", function () {
         Track your daily nutrition and food intake
       </p>`;
 
-  renderFoodLogPage();
 
-  // زر مسح اليوم
-  const clearFoodLogBtn = document.getElementById("clear-foodlog");
-  if (clearFoodLogBtn) {
-    clearFoodLogBtn.addEventListener("click", () => {
-      const log = getFoodLog();
-      const today = getTodayKey();
 
-      if (log[today]) {
-        if (confirm("Are you sure you want to clear today's food log?")) {
-          delete log[today]; //
-          saveFoodLog(log);
 
-          updateProgressBars({
-            calories: 0,
-            protein: 0,
-            carbs: 0,
-            fat: 0,
-            items: [],
-          });
+// زر مسح اليوم 
+const clearFoodLogBtn = document.getElementById("clear-foodlog");
+if(clearFoodLogBtn){
+  clearFoodLogBtn.addEventListener("click", () => {
+    const log = getFoodLog();
+    const today = getTodayKey();
 
-          // مسح قائمة العناصر
-          const itemsList = document.getElementById("logged-items-list");
-          if (itemsList) {
-            itemsList.innerHTML = `<p class="text-gray-500 text-sm">No food logged today.</p>`;
-          }
+    if(log[today]){
+      if(confirm("Are you sure you want to clear today's food log?")){
+        delete log[today];  //
+        saveFoodLog(log);
 
-          alert("Today's food log cleared ");
+        updateProgressBars({
+          calories: 0,
+          protein: 0,
+          carbs: 0,
+          fat: 0,
+          items: []
+        });
+
+        // مسح قائمة العناصر
+        const itemsList = document.getElementById("logged-items-list");
+        if(itemsList){
+          itemsList.innerHTML = `<p class="text-gray-500 text-sm">No food logged today.</p>`;
         }
-      } else {
-        alert("No food logged today.");
+
+        alert("Today's food log cleared ");
       }
-    });
-  }
-  //-----------------------
+    } else {
+      alert("No food logged today.");
+    }
+  });
+    renderFoodLogPage();
+}
+//-----------------------  
+
 });
+
 
 function renderFoodLogPage() {
   const log = getFoodLog();
@@ -1344,6 +1339,7 @@ function renderFoodLogPage() {
   updateProgressBars(log[today]);
   renderLoggedItems(log[today].items);
   countTitle.innerText = `Logged Items (${items.length})`;
+
 }
 
 document.getElementById("add-product-btn").addEventListener("click", () => {
