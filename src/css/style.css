@@ -1,0 +1,10 @@
+
+.hidden {
+  display: none !important;
+}
+
+.nav-link.active {
+  background-color: #e5f7ee;
+  color: #10b981;
+  font-weight: 600;
+}
