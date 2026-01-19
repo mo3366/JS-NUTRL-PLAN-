@@ -1291,7 +1291,7 @@ FoodLogbotton.addEventListener("click", function () {
 
 
 
-// زر مسح اليوم 
+//  مسح اليوم 
 const clearFoodLogBtn = document.getElementById("clear-foodlog");
 if(clearFoodLogBtn){
   clearFoodLogBtn.addEventListener("click", () => {
@@ -1302,6 +1302,7 @@ if(clearFoodLogBtn){
       if(confirm("Are you sure you want to clear today's food log?")){
         delete log[today];  //
         saveFoodLog(log);
+  countTitle.innerText = `Logged Items (0)`;
 
         updateProgressBars({
           calories: 0,
@@ -1311,7 +1312,7 @@ if(clearFoodLogBtn){
           items: []
         });
 
-        // مسح قائمة العناصر
+
         const itemsList = document.getElementById("logged-items-list");
         if(itemsList){
           itemsList.innerHTML = `<p class="text-gray-500 text-sm">No food logged today.</p>`;
